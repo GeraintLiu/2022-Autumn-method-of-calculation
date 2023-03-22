@@ -1,0 +1,246 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{geometry,amsmath,amssymb}
+\geometry{left=15mm, left=15mm, right=15mm}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\mathe}{\mathrm{e}}
+\newcommand{\tmtextit}[1]{\text{{\itshape{#1}}}}
+\providecommand{\xequal}[2][]{\mathop{=}\limits_{#1}^{#2}}
+%%%%%%%%%% End TeXmacs macros
+
+\begin{document}
+
+\title{Homework 9}
+
+\author{刘家骥 PB20071417}
+
+\maketitle
+
+\
+
+1,
+
+解:
+
+(a)向前Euler公式如下
+\[ y (x_{k + 1}) = y (x_k) + h f (x_k, y (x_k)) \]
+\quad在本题中就是
+\[ y (x_{k + 1}) = y (x_k) - \frac{y (x_k) \text{}}{n}, \hspace{1.8em} k = 0,
+   \; 1, \; \cdot \cdot \, \cdot, \; n - 1 \]
+
+
+向后Euler公式如下
+\[ y (x_{k + 1}) = y (x_k) + h f (x_{k + 1}, y (x_{k + 1})) \]
+\quad在本题中就是
+\[ y (x_{k + 1}) = y (x_k) - \frac{y (x_{k + 1}) \text{}}{n} \text{},
+   \hspace{1.8em} k = 0, \; 1, \; \cdot \cdot \, \cdot, \; n - 1 \]
+
+
+梯形公式
+\[ y (x_{k + 1}) = y (x_k) - \frac{y (x_{k + 1}) + y (x_k) \text{}}{2 n}
+   \text{}, \hspace{1.8em} k = 0, \; 1, \; \cdot \cdot \, \cdot, \; n - 1 \]
+
+
+改进的Euler公式, 也就是把梯形公式右边的$y (x_{k + 1})
+$换成了向前Euler公式得到的$y (x_{k + 1})$, 从而避免迭代过程,
+以简化运算, 如下
+\[ y (x_{k + 1}) = y (x_k) - \frac{\left[ y (x_k) - \frac{y (x_k) \text{}}{n}
+   \right] + y (x_k) \text{}}{2 n} \text{}, \hspace{1.8em} k = 0, \; 1, \;
+   \cdot \cdot \, \cdot, \; n - 1 \]
+\qquad以上$y (x_k) = y_k .$
+
+(b)记$y_0 = y (0) \;,$
+
+向前Euler公式, 可变形为$y_{k + 1} = \left( 1 - \frac{1}{n} \right)
+y_k$, 因此结果是
+\[ y_n = \left( 1 - \frac{1}{n} \right)^n y_{_0} = \left( 1 - \frac{1}{n}
+   \right)^n \]
+
+
+\begin{flushleft}
+  向后Euler公式, 可变形为$y_{k + 1} = \left( \frac{n}{n + 1} \right)
+  y_k$, (这本来是隐式格式, 只不过本题中比较简单,
+  恰好化成这种可以直接计算的形式).因此结果是
+\end{flushleft}
+\[ y_n = \left( \frac{n}{n + 1} \right)^n y_{_0} = \left( \frac{n}{n + 1}
+   \right)^n \]
+
+
+梯形公式, 可变形为$y_{k + 1} = \frac{2 n - 1}{2 n + 1} y_k
+\;,$因此结果是
+\[ y_n = \left( \frac{2 n - 1}{2 n + 1} \right)^n y_{_0} = \left( \frac{2 n -
+   1}{2 n + 1} \right)^n \]
+
+
+\
+
+改进的Euler公式, 可变形为$y_{k + 1} = \left( 1 - \frac{1}{n} +
+\frac{1}{2 n^2} \right) y_k \;,$因此结果是
+\[ y_n = \left( 1 - \frac{1}{n} + \frac{1}{2 n^2} \right)^n y_{_0} = \left( 1
+   - \frac{1}{n} + \frac{1}{2 n^2} \right)^n \]
+
+
+(c)对于原问题, 容易得到其解析解是
+\[ y (x) = \mathe^{- x} \]
+
+
+因此$y (1) = \mathe^{- 1} \approx 0.36787944 \; .$
+
+由于极限
+\[ \lim_{n \rightarrow \pm \infty} \left( 1 + \frac{1}{n} \right)^n = \mathe
+\]
+
+
+因此向后Euler结果极限
+\[ \lim_{n \rightarrow + \infty} y_n = \mathe^{- 1} \]
+
+
+向前Euler结果极限
+\[ \lim_{n \rightarrow + \infty} y_n = \lim_{n \rightarrow + \infty} \left[
+   \left( 1 + \frac{1}{- n} \right)^{- n} \right]^{- 1} = \mathe^{- 1} \]
+
+
+梯形公式结果极限
+\[ \lim_{n \rightarrow + \infty} \left( \frac{2 n - 1}{2 n + 1} \right)^n =
+   \lim_{n \rightarrow + \infty} \left( \frac{1}{n - \frac{1}{2}} + 1
+   \right)^{- n} = \lim_{t \rightarrow + \infty} \left[ \left( \frac{1}{t} + 1
+   \right)^{- t} \left( \frac{1}{t} + 1 \right)^{- \frac{1}{2}} \right] =
+   \mathe^{- 1} \]
+
+
+改进的Euler公式, 可以用夹逼定理
+
+由于
+\[ \left( 1 - \frac{1}{n} + \frac{1}{2 n^2} \right) \cdot \left( \frac{1 +
+   n}{n} \right) = 1 + \frac{1 - n}{2 n^3} < 1 \hspace{1.2em} \Rightarrow \; 1
+   - \frac{1}{n} + \frac{1}{2 n^2} < \frac{n}{1 + n} \]
+
+
+有
+\[ \lim_{n \rightarrow \infty} \left( 1 - \frac{1}{n} \right)^n \leqslant
+   \lim_{n \rightarrow \infty} \left( 1 - \frac{1}{n} + \frac{1}{2 n^2}
+   \right)^n \leqslant \lim_{n \rightarrow \infty} \left( \frac{n}{1 + n}
+   \right)^n \]
+
+
+得到
+\[ \lim_{n \rightarrow \infty} \left( 1 - \frac{1}{n} + \frac{1}{2 n^2}
+   \right)^n = \mathe^{- 1} \]
+
+
+因此以上四种方法都能收敛到$y (1)$ .
+
+\
+
+2,
+
+解:
+
+原计算式是一个三步三阶的显式格式.
+也就是说要验证误差$y (x_{n + 1}) - y_{n + 1}$是4阶的.
+
+先假设在$x_{n +
+1}$左侧的其他点处\tmtextit{y}的精确值就是代入计算的值, 即
+\[ y_k = y (x_k), \hspace{1.8em} k = n - 2, \; n - 1, \; n \]
+
+
+则有
+\[ y_{n + 1} = y (x_{n - 1}) + \frac{h}{3} \left[ 7 f \left( x_n, \; y (x_n)
+   \right) - 2 f \left( x_{n - 1}, \; y (x_{n - 1}) \right) + f \left( x_{n -
+   2}, \; y (x_{n - 2}) \right) \right] \]
+
+
+然后将上式在$x_n$处作Taylor展开:
+\[ y (x_{n - 1}) = y (x_n) - h y' (x_n) + \frac{h^2}{2} y'' (x_n) -
+   \frac{h^3}{6} y''' (x_n) + \frac{h^4}{24} y^{(4)} (\eta_1) \]
+\[ \  \]
+\[ f \left( x_n, \; y (x_n) \right) = y' (x_n) \]
+\[ f \left( x_{n - 1}, \; y (x_{n - 1}) \right) = y' (x_{n - 1}) = y' (x) - h
+   y'' (x) + \frac{h^2}{2} y''' (x) - \frac{h^3}{6} y^{(4)} (\eta_2) \]
+\[ f \left( x_{n - 2}, \; y (x_{n - 2}) \right) = y' (x_{n - 2}) = y' (x) - 2
+   h y'' (x) + 2 h^2 y''' (x) - \frac{4 h^3}{3} y^{(4)} (\eta_3) \]
+
+
+再由介值定理, 整合得到
+\[ y_{n + 1} = y (x_n) + h y' (x_n) + \frac{h^2}{2} y'' (x_n) + \frac{h^3}{6}
+   y''' (x_n) - \frac{7 h^4}{24} y^{(4)} (\eta ) \]
+
+
+然后是对$y (x_{n + 1})$展开:
+\[ y (x_{n + 1}) = y (x_n) + h y' (x_n) + \frac{h^2}{2} y'' (x_n) +
+   \frac{h^3}{6} y''' (x_n) + \frac{h^4}{24} y^{(4)} (\theta) \]
+
+
+因此
+\[ y (x_{n + 1}) - y_{n + 1} = \frac{h^4}{24} y^{(4)} + \frac{7 h^4}{24}
+   y^{(4)} (\eta ) \xequal{\vartriangle} \frac{h^4}{3} y^{(4)} (\xi) =
+   \frac{h^4}{3} y^{(4)} (x_{n - 1}) + O (h^5) \]
+
+
+这就得到验证了.
+
+3,
+
+解:
+
+和构建显式格式的方法类似, 积分区间是$\left[ x_{n - 1}, \;
+x_{n + 1} \right],$ 积分节点是$\left\{ x_{n + 1}, \; x_n, \; x_{n - 1}
+\right\}$, 记公式为
+\[ y_{n + 1} = y_{n - 1} + h [\alpha_0 f (x_{n + 1}, y_{n + 1}) + \alpha_1 f
+   (x_n, y_n) + \alpha_2 f (x_{n - 1}, y_{n - 1})] \]
+
+
+然后由数值积分公式得到
+\[ \alpha_0 h = \int_{x_{n - 1}}^{x_{n + 1}} \frac{(x - x_n) (x - x_{n -
+   1})}{(x_{n + 1} - x_n) (x_{n + 1} - x_{n - 1})} \mathrm{d} x = \frac{h}{3}
+\]
+\[ \alpha_1 h = \int_{x_{n - 1}}^{x_{n + 1}} \frac{(x - x_{n + 1}) (x - x_{n -
+   1})}{(x_n - x_{n + 1}) (x_n - x_{n - 1})} \mathrm{d} x = \frac{4 h}{3} \]
+\[ \alpha_2 h = \int_{x_{n - 1}}^{x_{n + 1}} \frac{(x - x_{n + 1}) (x -
+   x_n)}{(x_{n - 1} - x_{n + 1}) (x_{n - 1} - x_n)} \mathrm{d} x = \frac{h}{3}
+\]
+
+
+由此得到了
+\[ y_{n + 1} = y_{n - 1} + \frac{h}{3} [f (x_{n + 1}, y_{n + 1}) + 4 f (x_n,
+   y_n) + f (x_{n - 1}, y_{n - 1})] \]
+
+
+假设$y_n = y (x_n), \hspace{0.8em} y_{n - 1} = y (x_{n - 1}),
+\hspace{0.8em}$为方便运算, 也设上式右边的$y_{n + 1} = y (x_{n +
+1}), \hspace{0.8em}$
+
+对上式于$x_n 处$Taylor展开得到
+\[ y_{n + 1} = y (x_n) + h y' (x_n) + \frac{h^2}{2} y'' (x_n) + \frac{h^3}{6}
+   y''' (x_n) + \frac{h^4}{24} y^{(4)} (x_n) + \frac{7 h^5}{360} y^{(5)} (x_n)
+   + O (h^6) \]
+
+
+然后与$y (x_{n + 1})$的Taylor展开式相减, 得到
+\[ y (x_{n + 1}) - y_{n + 1} = - \frac{h^5}{90} y^{(5)} (x_n) + O (h^6) \]
+
+
+也就是说误差主项是$- \frac{h^5}{90} y^{(5)} (x_n),$
+这个公式的阶数是4.
+
+为了得到预估-校正公式,
+我们需要另外求出显式格式的公式(这里可以套用上一题的公式,
+因为都是\tmtextit{p}=1, \tmtextit{q}=2的情形), 如下:
+\[ \  \]
+\[ y_{n + 1} = y_{n - 1} + \frac{h}{3} \left[ 7 f \left( x_n, \; y_n \right) -
+   2 f \left( x_{n - 1}, \; y_{n - 1} \right) + f \left( x_{n - 2}, \; y_{n -
+   2} \right) \right] \]
+
+
+因此预估-校正公式就是
+\[ \left\{ \begin{array}{c}
+     \bar{y}_{n + 1} = y_{n - 1} + \frac{h}{3} \left[ 7 f \left( x_n, \; y_n
+     \right) - 2 f \left( x_{n - 1}, \; y_{n - 1} \right) + f \left( x_{n -
+     2}, \; y_{n - 2} \right) \right]\\
+     y_{n + 1} = y_{n - 1} + \frac{h}{3} [f (x_{n + 1}, \bar{y}_{n + 1}) + 4 f
+     (x_n, y_n) + f (x_{n - 1}, y_{n - 1})]
+   \end{array} \right. \]
+
+
+\end{document}
